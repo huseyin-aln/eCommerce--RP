@@ -3,9 +3,7 @@ import registerImg from "../../assets/register.png";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/card/Card";
 import { useState } from "react";
-import { toast } from "react-toastify";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/config";
+import { createUser } from "../../firebase/config";
 import Loader from "../../components/loader/Loader";
 
 const Register = () => {
@@ -16,26 +14,11 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const registerUser = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== cPassword) {
-      toast.error("Passwords do not match.");
-    }
     setIsLoading(true);
-
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-
-        setIsLoading(false);
-        toast.success("Registration successful...");
-        navigate("/login");
-      })
-      .catch((error) => {
-        toast.error(error.message);
-        setIsLoading(false);
-      });
+    createUser(email, password, cPassword, navigate);
+    setIsLoading(false);
   };
 
   return (
@@ -46,7 +29,7 @@ const Register = () => {
           <div className={styles.form}>
             <h2>Register</h2>
 
-            <form onSubmit={registerUser}>
+            <form onSubmit={handleSubmit}>
               <input
                 type="text"
                 placeholder="Email"

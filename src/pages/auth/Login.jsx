@@ -4,14 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import Card from "../../components/card/Card";
 import { useState } from "react";
-import {
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
-import { auth } from "../../firebase/config";
-
-import { toast } from "react-toastify";
+import { signIn, signUpProvider } from "../../firebase/config";
 import Loader from "../../components/loader/Loader";
 
 const Login = () => {
@@ -21,36 +14,15 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const loginUser = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     setIsLoading(true);
-
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // const user = userCredential.user;
-        setIsLoading(false);
-        toast.success("Login successful...");
-        navigate("/");
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        toast.error(error.message);
-      });
+    signIn(email, password, navigate);
+    // setIsLoading(false);
   };
 
-  // Login with Google
-  const provider = new GoogleAuthProvider();
-
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // const user = result.user;
-        toast.success("Login successfully...");
-        navigate("/");
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
+  const handleProviderLogin = () => {
+    signUpProvider(navigate);
   };
 
   return (
@@ -65,7 +37,7 @@ const Login = () => {
           <div className={styles.form}>
             <h2>Login</h2>
 
-            <form onSubmit={loginUser}>
+            <form onSubmit={handleLogin}>
               <input
                 type="text"
                 placeholder="Email"
@@ -84,20 +56,25 @@ const Login = () => {
                 Login
               </button>
               <div className={styles.links}>
-                <Link to="/reset">Reset Password</Link>
+                <Link to="/reset">
+                  <span className={styles.registerLink}>Forgot Password?</span>{" "}
+                </Link>
               </div>
               <p>-- or --</p>
             </form>
 
             <button
               className="--btn --btn-danger --btn-block"
-              onClick={signInWithGoogle}
+              onClick={handleProviderLogin}
             >
               <FaGoogle color="#fff" /> Login With Google
             </button>
             <span className={styles.register}>
               <p>Don't have an account?</p>
-              <Link to="/register">Register</Link>
+
+              <Link to="/register">
+                <span className={styles.registerLink}>Register</span>
+              </Link>
             </span>
           </div>
         </Card>

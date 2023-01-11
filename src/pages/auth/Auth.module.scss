@@ -34,7 +34,12 @@
           display: flex;
           justify-content: space-between;
           margin: 5px 0;
+          font-size: 1.4rem;
+          color: #0b5ed7;
+          text-decoration: underline;
+          cursor: pointer;
         }
+       
   
         p {
           text-align: center;
@@ -46,6 +51,13 @@
         justify-content: center;
         align-items: center;
         margin-top: 1rem;
+        
+      }
+      .registerLink {
+        margin-left: 0.5rem;
+        color: #0b5ed7;
+        text-decoration: underline;
+        cursor: pointer;
       }
     }
   
