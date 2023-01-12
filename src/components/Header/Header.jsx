@@ -3,14 +3,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { FaShoppingCart, FaTimes, FaUserCircle } from "react-icons/fa";
 import { HiMenu } from "react-icons/hi";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../../firebase/config";
-import { toast } from "react-toastify";
+import { logoutUser, userObserver } from "../../firebase/config";
 import { useDispatch } from "react-redux";
-import {
-  REMOVE_ACTIVE_USER,
-  SET_ACTIVE_USER,
-} from "../../redux/slice/authSlice";
 import ShowOnLogin, { ShowOnLogout } from "../hiddenLink/HiddenLink";
 
 const Header = () => {
@@ -23,32 +17,7 @@ const Header = () => {
 
   // Monitor currently sign in user
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log(user);
-
-        if (user.displayName == null) {
-          const emailName = user.email.substring(0, user.email.indexOf("@"));
-          const userEmailName =
-            emailName.charAt(0).toUpperCase() + emailName.slice(1);
-
-          setDisplayName(userEmailName);
-        } else {
-          setDisplayName(user.displayName);
-        }
-
-        dispatch(
-          SET_ACTIVE_USER({
-            email: user.email,
-            userName: user.displayName ? user.displayName : displayName,
-            userID: user.uid,
-          })
-        );
-      } else {
-        setDisplayName("");
-        dispatch(REMOVE_ACTIVE_USER());
-      }
-    });
+    userObserver(displayName, setDisplayName, dispatch);
   }, [dispatch, displayName]);
 
   const toggleMenu = () => {
@@ -60,17 +29,6 @@ const Header = () => {
   };
 
   const activeLink = ({ isActive }) => (isActive ? `${styles.active}` : "");
-
-  const logoutUser = () => {
-    signOut(auth)
-      .then(() => {
-        toast.success("Logout succesfully...");
-        navigate("/");
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-  };
 
   return (
     <>
@@ -138,7 +96,7 @@ const Header = () => {
                     My Orders
                   </NavLink>
 
-                  <NavLink to="/" onClick={logoutUser}>
+                  <NavLink to="/" onClick={() => logoutUser(navigate)}>
                     Logout
                   </NavLink>
                 </ShowOnLogin>

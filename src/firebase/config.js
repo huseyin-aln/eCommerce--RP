@@ -10,13 +10,15 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  updateProfile,
+  // updateProfile,
 } from "firebase/auth";
 import {
   toastErrorNotify,
   toastSuccessNotify,
   toastWarnNotify,
 } from "../helpers/ToastNotify";
+
+import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "../redux/slice/authSlice";
 
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_apiKey,
@@ -92,6 +94,46 @@ export const forgotPassword = (email) => {
     .catch((err) => {
       toastErrorNotify(err.message);
     });
+};
+
+export const logoutUser = (navigate) => {
+  signOut(auth)
+    .then(() => {
+      toastSuccessNotify("Logout succesfully...");
+      navigate("/");
+    })
+    .catch((error) => {
+      toastErrorNotify(error.message);
+    });
+};
+
+export const userObserver = (displayName, setDisplayName, dispatch) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log(user);
+
+      if (user.displayName == null) {
+        const emailName = user.email.substring(0, user.email.indexOf("@"));
+        const userEmailName =
+          emailName.charAt(0).toUpperCase() + emailName.slice(1);
+
+        setDisplayName(userEmailName);
+      } else {
+        setDisplayName(user.displayName);
+      }
+
+      dispatch(
+        SET_ACTIVE_USER({
+          email: user.email,
+          userName: user.displayName ? user.displayName : displayName,
+          userID: user.uid,
+        })
+      );
+    } else {
+      setDisplayName("");
+      dispatch(REMOVE_ACTIVE_USER());
+    }
+  });
 };
 
 export const db = getFirestore(app);
