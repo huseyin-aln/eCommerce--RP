@@ -1,5 +1,5 @@
 import styles from "./Loader.module.scss";
-import loaderImg from "../../assets/loader.gif";
+import loaderImg from "../../assets/images/loader.gif";
 import ReactDOM from "react-dom";
 
 const Loader = () => {

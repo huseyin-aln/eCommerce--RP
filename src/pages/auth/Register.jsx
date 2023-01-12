@@ -1,5 +1,5 @@
 import styles from "./Auth.module.scss";
-import registerImg from "../../assets/register.png";
+import registerImg from "../../assets/images/register.png";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "../../components/card/Card";
 import { useState } from "react";

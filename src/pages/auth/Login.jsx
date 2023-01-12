@@ -1,5 +1,5 @@
 import styles from "./Auth.module.scss";
-import loginImg from "../../assets/login.png";
+import loginImg from "../../assets/images/login.png";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import Card from "../../components/card/Card";

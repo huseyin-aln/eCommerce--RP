@@ -1,5 +1,5 @@
 import styles from "./Auth.module.scss";
-import resetImg from "../../assets/forgot.png";
+import resetImg from "../../assets/images/forgot.png";
 import { Link } from "react-router-dom";
 import Card from "../../components/card/Card";
 import { useState } from "react";

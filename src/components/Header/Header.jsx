@@ -37,7 +37,7 @@ const Header = () => {
           <div className={styles.logo}>
             <Link to="/">
               <h2>
-                {"<h-aln/>"} <span>Shop</span>.
+                {"<h>"} <span>Shop</span>.
               </h2>
             </Link>
           </div>
@@ -61,7 +61,7 @@ const Header = () => {
                 <div className={styles.logo}>
                   <Link to="/">
                     <h2>
-                      {"<h-aln/>"} <span>Shop</span>.
+                      {"<h>"} <span>Shop</span>.
                     </h2>
                   </Link>
                 </div>
@@ -87,7 +87,7 @@ const Header = () => {
                 </ShowOnLogout>
 
                 <ShowOnLogin>
-                  <a href="#home" style={{ color: "#ff7722" }}>
+                  <a href="#home" style={{ color: "#CF7808" }}>
                     <FaUserCircle size={16} />
                     Hi, {displayName}
                   </a>

@@ -1,10 +1,9 @@
 import styles from "./Footer.module.scss";
 
-const date = new Date();
-const year = date.getFullYear();
-
 const Footer = () => {
-  return <div className={styles.footer}>&copy; {year} All Rights Reserved</div>;
+  return (
+    <div className={styles.footer}>Copyright &copy; 2023, {"<h-aln/>"}</div>
+  );
 };
 
 export default Footer;

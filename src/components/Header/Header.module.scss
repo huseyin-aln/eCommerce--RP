@@ -14,9 +14,9 @@
     .header {
       width: 100%;
       height: 8rem;
-      max-width: 1000px;
+      // max-width: 1000px;
       margin: 0 auto;
-      padding: 1rem;
+      padding: 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -29,7 +29,7 @@
       color: #fff;
       cursor: pointer;
       span {
-        color: orangered;
+        color: #CF7808;
       }
     }
   
@@ -51,7 +51,7 @@
           a {
             color: #fff;
             &:hover {
-              color: orangered;
+              color: #CF7808;
             }
           }
         }
@@ -66,7 +66,7 @@
         color: #fff;
         position: relative;
         &:hover {
-          color: orangered;
+          color: #CF7808;
         }
         &.active {
           color: var(--color-danger);
@@ -91,7 +91,7 @@
         margin: 0 5px;
         color: #fff;
         &:hover {
-          color: orangered;
+          color: #CF7808;
         }
         &.active {
           color: var(--color-danger);
@@ -188,7 +188,7 @@
           color: #fff;
           position: relative;
           &:hover {
-            color: orangered;
+            color: #CF7808;
           }
           p {
             position: absolute;
