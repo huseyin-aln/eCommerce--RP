@@ -6,6 +6,7 @@ import { HiMenu } from "react-icons/hi";
 import { logoutUser, userObserver } from "../../firebase/config";
 import { useDispatch } from "react-redux";
 import ShowOnLogin, { ShowOnLogout } from "../hiddenLink/HiddenLink";
+import AdminOnlyRoute from "../adminOnlyRoute/AdminOnlyRoute";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -67,6 +68,13 @@ const Header = () => {
                 </div>
                 <FaTimes size={22} color="#fff" onClick={hideMenu} />
               </li>
+
+              <li>
+                <AdminOnlyRoute>
+                  <button className="--btn --btn-primary">Admin</button>
+                </AdminOnlyRoute>
+              </li>
+
               <li>
                 <NavLink to="/" className={activeLink}>
                   Home
