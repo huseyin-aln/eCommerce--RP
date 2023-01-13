@@ -35,7 +35,7 @@ export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 
 export const selectEmail = (state) => state.auth.email;
 
-export const selectEUserName = (state) => state.auth.userName;
+export const selectUserName = (state) => state.auth.userName;
 
 export const selectEUserID = (state) => state.auth.userID;
 

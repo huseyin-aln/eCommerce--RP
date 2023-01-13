@@ -6,7 +6,9 @@ import { HiMenu } from "react-icons/hi";
 import { logoutUser, userObserver } from "../../firebase/config";
 import { useDispatch } from "react-redux";
 import ShowOnLogin, { ShowOnLogout } from "../hiddenLink/HiddenLink";
-import AdminOnlyRoute from "../adminOnlyRoute/AdminOnlyRoute";
+import AdminOnlyRoute, {
+  AdminOnlyLink,
+} from "../adminOnlyRoute/AdminOnlyRoute";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -70,9 +72,11 @@ const Header = () => {
               </li>
 
               <li>
-                <AdminOnlyRoute>
-                  <button className="--btn --btn-primary">Admin</button>
-                </AdminOnlyRoute>
+                <AdminOnlyLink>
+                  <Link to="/admin/home">
+                    <button className="--btn --btn-primary">Admin</button>
+                  </Link>
+                </AdminOnlyLink>
               </li>
 
               <li>
