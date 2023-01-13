@@ -12,6 +12,7 @@ import {
   Reset,
 } from "../pages";
 import AdminOnlyRoute from "../components/adminOnlyRoute/AdminOnlyRoute";
+import ProductDetails from "../components/product/productDetails/ProductDetails";
 
 const AppRouter = () => {
   return (
@@ -35,6 +36,7 @@ const AppRouter = () => {
               </AdminOnlyRoute>
             }
           />
+          <Route path="/product-details/:id" element={<ProductDetails />} />
         </Routes>
         <Footer />
       </BrowserRouter>
